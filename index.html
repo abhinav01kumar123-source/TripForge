@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b35">
+  <title>TripForge — Travel Planner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="TripForge home"><span class="brand-mark">✦</span><span>Trip<span>Forge</span></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-menu">
+        <button class="nav-link active" data-page="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-link" data-page="trips"><span>▣</span> My Trips</button>
+        <button class="nav-link" data-page="destinations"><span>⌖</span> Destinations</button>
+        <button class="nav-link" data-page="itinerary"><span>☷</span> Itinerary</button>
+        <button class="nav-link" data-page="budget"><span>◈</span> Budget Tracker</button>
+        <button class="nav-link" data-page="favorites"><span>♡</span> Favorites</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="tip-card"><div class="tip-icon">✧</div><strong>Make every trip count.</strong><p>Your next adventure is only a plan away.</p><button id="tipCreate">Plan a trip <span>→</span></button></div>
+        <button class="nav-link" data-page="settings"><span>⚙</span> Settings</button>
+        <div class="profile-mini"><div class="avatar">TF</div><div><strong id="sidebarName">Trip Planner</strong><small>Personal workspace</small></div><span class="profile-dots">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumbPage">Dashboard</strong></div>
+        <div class="top-actions"><span class="today-label" id="todayLabel"></span><button class="icon-button" id="quickAdd" title="Create a trip">＋</button><div class="top-avatar">TF</div></div>
+      </header>
+      <div class="page-content">
+        <section class="page active" id="page-dashboard">
+          <div class="welcome-row"><div><div class="eyebrow">YOUR TRAVEL COMMAND CENTER</div><h1>Good day, <span id="welcomeName">traveler</span> <span class="wave">✦</span></h1><p class="muted">Every great journey starts with a little planning.</p></div><button class="btn btn-primary" id="newTripBtn">＋ Create new trip</button></div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top"><span>Total trips</span><span class="stat-icon lilac">▣</span></div><strong id="statTrips">0</strong><small>Trips in your workspace</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Upcoming trips</span><span class="stat-icon mint">↗</span></div><strong id="statUpcoming">0</strong><small>Ready for takeoff</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Saved destinations</span><span class="stat-icon peach">⌖</span></div><strong id="statDestinations">0</strong><small>Places to explore</small></article>
+            <article class="stat-card"><div class="stat-top"><span>Planned budget</span><span class="stat-icon blue">₹</span></div><strong id="statBudget">₹0</strong><small>Across all your trips</small></article>
+          </div>
+          <div class="section-heading"><div><h2>Upcoming adventures</h2><p class="muted">Your next journeys at a glance</p></div><button class="text-button" data-goto="trips">View all trips →</button></div>
+          <div class="trip-grid" id="dashboardTrips"></div>
+          <div class="section-heading lower-heading"><div><h2>Recently saved destinations</h2><p class="muted">A little inspiration for your next escape</p></div><button class="text-button" data-goto="destinations">Explore all →</button></div>
+          <div class="destination-grid compact" id="dashboardDestinations"></div>
+        </section>
+
+        <section class="page" id="page-trips">
+          <div class="page-title-row"><div><div class="eyebrow">YOUR JOURNEYS</div><h1>My Trips</h1><p class="muted">Create, organize, and revisit your travel plans.</p></div><button class="btn btn-primary" id="tripsNewBtn">＋ Create trip</button></div>
+          <div class="toolbar"><div class="search-box"><span>⌕</span><input id="tripSearch" placeholder="Search trips..." aria-label="Search trips"></div><select id="tripFilter" aria-label="Filter trips"><option value="all">All trips</option><option value="upcoming">Upcoming</option><option value="past">Past</option></select></div>
+          <div class="trip-grid" id="allTrips"></div>
+        </section>
+
+        <section class="page" id="page-destinations">
+          <div class="page-title-row"><div><div class="eyebrow">FIND YOUR NEXT ESCAPE</div><h1>Destinations</h1><p class="muted">Explore inspiring places and save the ones you love.</p></div></div>
+          <div class="toolbar"><div class="search-box"><span>⌕</span><input id="destinationSearch" placeholder="Search destinations..." aria-label="Search destinations"></div><select id="destinationRegion"><option value="all">All regions</option><option>Asia</option><option>Europe</option><option>Americas</option><option>Middle East</option></select></div>
+          <div class="destination-grid" id="allDestinations"></div>
+        </section>
+
+        <section class="page" id="page-itinerary">
+          <div class="page-title-row"><div><div class="eyebrow">PLAN THE DETAILS</div><h1>Itinerary Planner</h1><p class="muted">Build a day-by-day plan for any of your trips.</p></div></div>
+          <div class="planner-layout"><div class="panel trip-picker"><label for="itineraryTrip">Select a trip</label><select id="itineraryTrip"></select><div class="planner-note"><span>✦</span><div><strong>Travel tip</strong><p>Keep your schedule flexible. Leave room for spontaneous discoveries.</p></div></div></div><div class="panel itinerary-panel" id="itineraryContent"></div></div>
+        </section>
+
+        <section class="page" id="page-budget">
+          <div class="page-title-row"><div><div class="eyebrow">KEEP IT ON TRACK</div><h1>Budget Tracker</h1><p class="muted">Understand your planned trip costs at a glance.</p></div></div>
+          <div class="budget-summary" id="budgetSummary"></div>
+          <div class="panel budget-panel"><div class="section-heading"><div><h2>Trip budgets</h2><p class="muted">Manage estimated budgets for each journey</p></div></div><div id="budgetRows"></div></div>
+        </section>
+
+        <section class="page" id="page-favorites">
+          <div class="page-title-row"><div><div class="eyebrow">YOUR SHORTLIST</div><h1>Favorites</h1><p class="muted">The places you have your eye on.</p></div></div>
+          <div class="destination-grid" id="favoriteDestinations"></div>
+        </section>
+
+        <section class="page" id="page-settings">
+          <div class="page-title-row"><div><div class="eyebrow">MAKE IT YOURS</div><h1>Settings</h1><p class="muted">Personalize your TripForge workspace.</p></div></div>
+          <div class="panel settings-panel"><h2>Profile preferences</h2><form id="settingsForm" class="settings-form"><label>Your name<input id="settingsName" maxlength="40" placeholder="Your name"></label><label>Currency<select id="settingsCurrency"><option value="INR">INR — Indian Rupee (₹)</option><option value="USD">USD — US Dollar ($)</option><option value="EUR">EUR — Euro (€)</option><option value="GBP">GBP — British Pound (£)</option></select></label><button class="btn btn-primary" type="submit">Save preferences</button></form><div class="danger-zone"><div><strong>Reset demo data</strong><p>This restores the sample trips and destinations. Your changes will be lost.</p></div><button class="btn btn-danger" id="resetData">Reset data</button></div></div>
+        </section>
+      </div>
+      <footer class="footer">Made for the journeys ahead <span>✦</span> <small>TripForge</small></footer>
+    </main>
+  </div>
+
+  <dialog id="tripDialog" class="modal"><form id="tripForm" method="dialog"><div class="modal-header"><div><div class="eyebrow">NEW ADVENTURE</div><h2 id="tripDialogTitle">Create a trip</h2></div><button type="button" class="close-button" data-close="tripDialog">×</button></div><input type="hidden" id="tripId"><div class="form-grid"><label class="full">Trip name<input id="tripName" required maxlength="70" placeholder="e.g. Summer in the mountains"></label><label>Destination<input id="tripPlace" required maxlength="60" placeholder="e.g. Manali, India"></label><label>Start date<input id="tripStart" type="date" required></label><label>End date<input id="tripEnd" type="date" required></label><label>Estimated budget<input id="tripBudget" type="number" min="0" step="100" placeholder="25000"></label><label class="full">Short note<textarea id="tripNote" rows="2" maxlength="180" placeholder="What are you looking forward to?"></textarea></label></div><div class="modal-actions"><button type="button" class="btn btn-quiet" data-close="tripDialog">Cancel</button><button class="btn btn-primary" type="submit">Save trip</button></div></form></dialog>
+
+  <dialog id="activityDialog" class="modal"><form id="activityForm" method="dialog"><div class="modal-header"><div><div class="eyebrow">BUILD YOUR DAY</div><h2>Add itinerary activity</h2></div><button type="button" class="close-button" data-close="activityDialog">×</button></div><input type="hidden" id="activityTripId"><div class="form-grid"><label>Day<select id="activityDay"></select></label><label>Time<input id="activityTime" type="time" value="10:00"></label><label class="full">Activity<input id="activityTitle" required maxlength="80" placeholder="e.g. Visit the local market"></label><label class="full">Details<input id="activityDetails" maxlength="140" placeholder="Address, booking note, or reminder"></label></div><div class="modal-actions"><button type="button" class="btn btn-quiet" data-close="activityDialog">Cancel</button><button class="btn btn-primary" type="submit">Add activity</button></div></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
